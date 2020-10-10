@@ -27,4 +27,25 @@ func SetupRoutes(app *fiber.App) {
 	// Users
 	app.Get("/users", controllers.GetUsers)
 	app.Post("/users", controllers.CreateUser)
+
+	// Order
+	app.Get("/orders", controllers.GetOrders)
+	app.Post("/orders", controllers.CreateOrder)
+	app.Get("/orders/:id", controllers.GetOrderById)
+	app.Put("/orders/:id", controllers.UpdateOrderById)
+	app.Delete("/orders/:id", controllers.DeleteOrderById)
+
+	// Food
+	app.Get("/foods", controllers.GetFoods)
+	app.Post("/foods", controllers.CreateFood)
+	app.Get("/foods/:id", controllers.GetFoodById)
+	app.Put("/foods/:id", controllers.UpdateFoodById)
+	app.Delete("/foods/:id", controllers.DeleteFoodById)
+
+	// TypeFood
+	app.Get("/type_foods", controllers.GetTypeFoods)
+	app.Post("/type_foods", controllers.CreateTypeFood)
+	app.Get("/type_foods/:id", controllers.GetTypeFoodById)
+	app.Put("/type_foods/:id", controllers.UpdateTypeFoodById)
+	app.Delete("/type_foods/:id", controllers.DeleteTypeFoodById)
 }
