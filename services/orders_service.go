@@ -13,6 +13,10 @@ func GetOrdersService() []models.Order {
 	return repositories.GetOrders()
 }
 
+func GetOrdersServiceByAssociations() []models.Order {
+	return repositories.GetOrdersByAssociation()
+}
+
 func GetOrderByIdService(id interface{}) (order models.Order, err error) {
 	order, err = repositories.GetOrderById(id)
 	return order, err

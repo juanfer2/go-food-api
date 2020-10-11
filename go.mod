@@ -18,6 +18,7 @@ require (
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.2
 	github.com/gofiber/fiber v1.14.6
 	github.com/gofiber/fiber/v2 v2.0.5
+	github.com/gofiber/jwt/v2 v2.0.0
 	github.com/golangci/golangci-lint v1.31.0 // indirect
 	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/imdario/mergo v0.3.11 // indirect
@@ -33,6 +34,7 @@ require (
 	github.com/spf13/viper v1.7.1
 	github.com/swaggo/swag v1.6.7
 	github.com/twinj/uuid v1.0.0
+	github.com/ulule/deepcopier v0.0.0-20200430083143-45decc6639b6
 	github.com/urfave/cli/v2 v2.2.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.16.0

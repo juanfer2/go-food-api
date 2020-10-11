@@ -4,6 +4,7 @@ import (
 	swagger "github.com/arsmn/fiber-swagger/v2"
 	_ "github.com/arsmn/fiber-swagger/v2/example/docs"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 
 	"github.com/juanfer2/api-rest-go/databases"
 	"github.com/juanfer2/api-rest-go/models"
@@ -32,6 +33,7 @@ func StartServerApp() {
 	// .env - It will search for the .env file in the current directory
 
 	app := fiber.New()
+	app.Use(cors.New())
 	app.Use("/api-doc", swagger.Handler) // default
 
 	app.Use("/api-doc", swagger.New(swagger.Config{ // custom

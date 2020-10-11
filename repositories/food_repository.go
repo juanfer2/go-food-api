@@ -10,7 +10,7 @@ import (
 func GetFoods() []models.Food {
 	db := databases.Conn()
 	var foods []models.Food
-	db.Find(&foods)
+	db.Preload("TypeFood").Find(&foods)
 	return foods
 }
 

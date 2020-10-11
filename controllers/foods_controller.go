@@ -5,8 +5,14 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/juanfer2/api-rest-go/models"
+
 	"github.com/juanfer2/api-rest-go/services"
 )
+
+type FoodResponse struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
 
 func parserBodyFood(c *fiber.Ctx) models.Food {
 	newFood := new(models.Food)
@@ -23,8 +29,7 @@ func CreateFood(c *fiber.Ctx) error {
 
 func GetFoods(c *fiber.Ctx) error {
 	foods := services.GetFoodsService()
-	return c.JSON(foods)
-
+	return c.JSON(fiber.Map{"status": "success", "message": "All foods", "data": foods})
 }
 
 func GetFoodById(c *fiber.Ctx) error {

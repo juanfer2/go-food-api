@@ -14,6 +14,14 @@ func GetOrders() []models.Order {
 	return orders
 }
 
+func GetOrdersByAssociation() []models.Order {
+	db := databases.Conn()
+	var orders []models.Order
+	// db.Model(&orders).Related(&orders.OrderFoods)
+	db.Preload("OrderFoods").Preload("User").Find(&orders)
+	return orders
+}
+
 func GetOrderById(id interface{}) (order models.Order, err error) {
 	db := databases.Conn()
 	db.First(&order, id)

@@ -23,7 +23,7 @@ func CreateOrder(c *fiber.Ctx) error {
 }
 
 func GetOrders(c *fiber.Ctx) error {
-	orders := services.GetOrdersService()
+	orders := services.GetOrdersServiceByAssociations()
 	return c.JSON(orders)
 
 }

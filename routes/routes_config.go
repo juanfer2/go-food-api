@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
+	jwtware "github.com/gofiber/jwt/v2"
+	"github.com/juanfer2/api-rest-go/constants"
 	"github.com/juanfer2/api-rest-go/controllers"
 )
 
@@ -13,20 +15,26 @@ func helloWorld(c *fiber.Ctx) error {
 	return c.SendString(msg) // => Hello john 👋!
 }
 
-func SetupRoutes(app *fiber.App) {
-	// Home
-	app.Get("/", helloWorld)
+func skipRoutes(app *fiber.App) {
+	app.Post("/users", controllers.CreateUser)
 
-	// Tasks
-	app.Get("/tasks", controllers.GetTasks)
-	app.Post("/tasks", controllers.CreateTasks)
-	app.Get("/tasks/:id", controllers.GetTasksById)
-	app.Put("/tasks/:id", controllers.UpdateTaskById)
-	app.Delete("/tasks/:id", controllers.DeleteTaskById)
+	// Food
+	app.Get("/foods", controllers.GetFoods)
+	app.Get("/foods/:id", controllers.GetFoodById)
+
+	// TypeFood
+	app.Get("/type_foods", controllers.GetTypeFoods)
+	app.Get("/type_foods/:id", controllers.GetTypeFoodById)
+}
+
+func protectedRoutes(app *fiber.App) {
+	// JWT Middleware
+	app.Use(jwtware.New(jwtware.Config{
+		SigningKey: []byte(constants.SecretKey),
+	}))
 
 	// Users
 	app.Get("/users", controllers.GetUsers)
-	app.Post("/users", controllers.CreateUser)
 
 	// Order
 	app.Get("/orders", controllers.GetOrders)
@@ -36,16 +44,19 @@ func SetupRoutes(app *fiber.App) {
 	app.Delete("/orders/:id", controllers.DeleteOrderById)
 
 	// Food
-	app.Get("/foods", controllers.GetFoods)
 	app.Post("/foods", controllers.CreateFood)
-	app.Get("/foods/:id", controllers.GetFoodById)
 	app.Put("/foods/:id", controllers.UpdateFoodById)
 	app.Delete("/foods/:id", controllers.DeleteFoodById)
 
 	// TypeFood
-	app.Get("/type_foods", controllers.GetTypeFoods)
 	app.Post("/type_foods", controllers.CreateTypeFood)
-	app.Get("/type_foods/:id", controllers.GetTypeFoodById)
 	app.Put("/type_foods/:id", controllers.UpdateTypeFoodById)
 	app.Delete("/type_foods/:id", controllers.DeleteTypeFoodById)
+}
+
+func SetupRoutes(app *fiber.App) {
+	// Home
+	app.Get("/", helloWorld)
+	skipRoutes(app)
+	protectedRoutes(app)
 }

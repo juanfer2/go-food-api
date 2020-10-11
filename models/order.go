@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -13,6 +15,12 @@ type Order struct {
 
 	UserID int  `json:"user_id"`
 	User   User `gorm:"foreignKey:UserID"`
+
+	OrderFoods []OrderFood `json:"order_foods" gorm:"foreignKey:OrderID"`
+
+	CreatedAt time.Time      `json:"created_at"`
+	UpdatedAt time.Time      `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
 
 func (f Order) IsNull() bool {
